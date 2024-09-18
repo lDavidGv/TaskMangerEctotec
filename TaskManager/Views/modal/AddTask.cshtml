@@ -1,0 +1,42 @@
+﻿
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{Action}} Tarea</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" ng-model="idTarea" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCEP">Titulo</label>
+                            <input type="text" class="form-control" ng-model="TituloTarea">
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCEP">Descripción</label>
+                            <input type="text" class="form-control" ng-model="DesacripcionTarea">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCEP">Estatus</label>
+                            <input type="checkbox" class="form-check" <input type="checkbox" ng-model="EstatusTarea" ng-true-value=true ng-false-value=false>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="AddUpdateEmployee()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

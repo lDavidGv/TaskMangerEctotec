@@ -1,0 +1,153 @@
+﻿<div ng-controller="myCntrl">
+
+    <h1>Lista de Tareas</h1>
+
+    <br />
+    <button type="button" class="btn btn-warning" value="Agregar Tarea" ng-click="AddTaskModalS()" data-bs-toggle="modal" data-bs-target="#AddTaskModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill-add" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0M8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1"></path>
+            <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12 12 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7m6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.55 4.55 0 0 1 .23-2.002m-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.5 4.5 0 0 1-1.3-1.905"></path>
+        </svg>
+        Agregar Tarea
+    </button>
+
+    <div class=" mt-4">
+        <table cellpadding="12" class="table table-striped table-hover caption-top">
+            <caption>Lista de Tareas</caption>
+            <thead class="table-dark">
+                <tr>
+                    <td><b>ID</b></td>
+                    <td><b>Titulo</b></td>
+                    <td><b>Descripcion</b></td>
+                    <td><b>Estado</b></td>
+                    <td><b>Fecha de Creación</b></td>
+                    <td><b>Actions</b></td>
+                </tr>
+            </thead>
+
+
+            <tr ng-repeat="task in tasks">
+                <td>
+                    {{task.Id}}
+                </td>
+                <td>
+                    {{task.Titulo}}
+                </td>
+                <td>
+                    {{task.Descripcion}}
+                </td>
+                <td>
+                    <span class="{{task.Estado == true ? 'badge rounded-pill bg-success' : 'badge rounded-pill bg-danger' }}">{{task.Estado == true ? 'ACTIVO' : 'INACTIVO' }}</span>
+
+                </td>
+                <td>
+                    {{task.FechaCreacion}}
+                </td>
+                <td>
+                    <span ng-click="edit(task)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddTaskModal"><i class="bi bi-pencil-square"></i> </span>
+                    <span ng-click="deleteAsk(task)" class="btn btn-secondary"><i class="bi bi-trash3-fill"></i> </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center justify-content-center" id="">{{Action}} Tarea </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <span><h5>Desea borrar la tarea ?</h5> </span>
+                    </div>
+                    <div class="row">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-question-diamond-fill" viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM5.495 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927"></path>
+                        </svg>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-warning" ng-click="delete(task)">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="AddTaskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">{{Action}} Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="myform" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCEP">ID</label>
+
+                                <input type="text" class="form-control" ng-model="idTarea" disabled>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCEP">Titulo</label>
+                                <input type="text" class="form-control" ng-model="TituloTarea" maxlength="100" required>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCEP">Descripción</label>
+                                <input type="text" class="form-control" ng-model="DesacripcionTarea" maxlength="500" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCEP">Estatus</label>
+                                <input type="checkbox" class="form-check" <input type="checkbox" ng-model="EstatusTarea" ng-true-value=true ng-false-value=false >
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="AddUpdate()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 7000; ">
+
+        <div class="toast bg-success toastSuccess">
+            <div class="toast-header">
+                <strong class="me-auto">Notificacion</strong>
+                <small>Justo ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <p class="text-white">{{message}}</p>
+            </div>
+        </div>
+
+        <div class="toast bg-warning toastError">
+            <div class="toast-header">
+                <strong class="me-auto">Notificacion</strong>
+                <small>Justo ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                <p class="">{{message}}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
